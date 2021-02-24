@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+
+<div class="jumbotron">
+  <h2 class="display-3 text-center">Crypto News Networking</h2>
+  <p class="lead text-center">One step destination for looking up prices, checking the status of trending cryptos & reading the top related articles!</p>
+  <hr class="my-4">
+</div>
+
+<div class="container">
+  <h4 class="text-center">A quick table for you to know more about the top cryptocurrencies currently</h4>
+  <br>
+</div>
+
+<div class="container">
+<table class="table table-bordered table-hover">
+  <thead class="thead bg-info">
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col">Price</th>
+      <th scope="col">24 hr High</th>
+      <th scope="col">24 hr Low</th>
+      <th scope="col">Market Cap</th>
+    </tr>
+  </thead>
+
+{% for key, value in price.DISPLAY.items %}
+
+  <tbody>
+    <tr>
+       <td>{{ key }}</td>
+       <td>{{ value.USD.PRICE }}</td>
+       <td> {{ value.USD.HIGHDAY }}</td>
+       <td>{{ value.USD.LOWDAY }} </td>
+       <td> {{ value.USD.MKTCAP}}</td>
+    </tr>
+
+{% endfor %}
+
+  </tbody>
+</table>
+
+ </div>
+<br>
+<br>
+
+
+<div class="container">
+  <h2 class="text-center">Read up the top 12 recent articles on cryptocurrency today</h2>
+  <br>
+
+<div class="row">
+  {%  for x in api.Data %}
+  {% if forloop.counter <= 12  %}
+    <div class="col-sm">
+    <div class="card" style="width: 18rem;">
+    <img class="card-img-top" src="{{ x.imageurl }}" alt="{{ x.source }}">
+    <div class="card-body">
+    <h5 class="card-title">{{ x.title|truncatewords:13 }} </h5>
+    <p class="card-text"> {{ x.body|truncatechars:30}}</p>
+    <a href="{{ x.url }}" class="btn btn-primary">Read More..</a>
+    </div>
+    </div>
+    <br>
+    </div>
+  {% endif %}
+{% endfor %}
+
+</div>
+</div>
+
+
+
+{% endblock %}
+

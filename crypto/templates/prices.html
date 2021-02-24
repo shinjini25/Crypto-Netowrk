@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+
+
+{% if crypto.Response %}
+
+           <div class="jumbotron jumbotron-fluid">
+          <div class="container">
+          <h1 class="display-4">Oops, looks like we encountered an error :( "</h1>
+          <p class="lead">{{ price }} is not a valid crypto. Please enter a valid crypto currency to look up.</p>
+          </div>
+          </div>
+{% endif %}
+
+
+{% for key,value in crypto.DISPLAY.items %}
+
+<div class="container">
+    <br>
+    <br>
+    <br>
+    <h2 class="text-center">Here's what the crypto you looked up looks like!</h2>
+    <br>
+    <br>
+<table class="table table-bordered table-striped table-hover">
+  <thead class="thead bg-info">
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col">Price</th>
+      <th scope="col">24 H High</th>
+      <th scope="col">24 H Low</th>
+      <th scope="col">Market Cap</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr>
+       <td>{{ key }}</td>
+       <td>{{ value.USD.PRICE }}</td>
+       <td> {{ value.USD.HIGHDAY }}</td>
+       <td>{{ value.USD.LOWDAY }} </td>
+       <td> {{ value.USD.MKTCAP}}</td>
+    </tr>
+
+
+  </tbody>
+</table>
+
+ </div>
+
+		{% endfor %}
+
+
+<br/><br/>
+
+{% endblock %}
